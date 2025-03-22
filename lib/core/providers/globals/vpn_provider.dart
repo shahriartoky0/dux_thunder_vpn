@@ -68,7 +68,6 @@ class VpnProvider extends ChangeNotifier {
 
   ///Connect to VPN server
   void connect() async {
-    // log("${vpnConfig?.config}");
     String? config;
     // try {
     //   // config = await OpenVPN.filteredConfig(vpnConfig?.config);

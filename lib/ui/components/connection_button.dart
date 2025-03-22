@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -237,6 +236,7 @@ class _ConnectionButtonState extends State<ConnectionButton>
 
   void _connectButtonClick(BuildContext context) {
     var vpnProvider = VpnProvider.read(context);
+
     if (vpnProvider.vpnStage != VPNStage.disconnected) {
       vpnProvider.disconnect();
       Provider.of<ConnectedServerProvider>(context, listen: false)
@@ -250,7 +250,6 @@ class _ConnectionButtonState extends State<ConnectionButton>
         interstitialAd?.showIfNotPro(context);
       }
     } else {
-      vpnProvider.connect();
       // log(vpnProvider.vpnConfig?.country.toString() ?? 'null value');
       if (vpnProvider.vpnConfig == null) {
         VpnConfig defaultConfig =
@@ -355,6 +354,8 @@ hTobb/WAAcA75GKmU4jn5Ln2
           }
         });
       }
+      // vpnProvider.connect();
+      VpnProvider.read(context).connect();
     }
   }
 

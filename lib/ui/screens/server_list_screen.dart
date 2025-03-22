@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-
 import '../../core/https/servers_http.dart';
 import '../../core/models/vpn_config.dart';
 import '../../core/resources/colors.dart';
@@ -79,52 +78,45 @@ class _ServerListScreenState extends State<ServerListScreen> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('server_list'.tr())),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Container(
-                decoration: BoxDecoration(
+        body: SmartRefresher(
+          onRefresh: loadData,
+          controller: _refreshControllers[0],
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Container(
+                  decoration: BoxDecoration(
                     color: isDarkMode ? backgroundDark : Colors.white,
-                    borderRadius: BorderRadius.circular(16)),
-                child: TextField(
-                  focusNode: focus,
-                  controller: _searchController,
-                  onChanged: _updateSearchQuery,
-                  decoration: InputDecoration(
-                    hintText: 'search_server'.tr(),
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: TextField(
+                    focusNode: focus,
+                    controller: _searchController,
+                    onChanged: _updateSearchQuery,
+                    decoration: InputDecoration(
+                      hintText: 'search_server'.tr(),
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: SmartRefresher(
-                onRefresh: loadData,
-                controller: _refreshControllers[0],
-                child: SingleChildScrollView(  // Ensure the content is scrollable
-                  child: Column(
-                    children: [
-                      // List of servers with filtering applied
-                      _filteredServers.isEmpty
-                          ? const Center(child: CircularProgressIndicator())
-                          : ListView.builder(
-                        shrinkWrap: true, // Makes ListView scrollable within the parent Column
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: _filteredServers.length,
-                        itemBuilder: (context, index) {
-                          return ServerItem(_filteredServers[index]);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+              _filteredServers.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _filteredServers.length,
+                itemBuilder: (context, index) {
+                  return ServerItem(_filteredServers[index]);
+                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

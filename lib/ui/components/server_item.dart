@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ndialog/ndialog.dart';
 
-
 import 'package:provider/provider.dart';
 
 import '../../core/models/connected_server_info.dart';
@@ -211,6 +210,7 @@ class _ServerItemState extends State<ServerItem>
     VpnProvider.read(context)
         .selectServer(context, widget.config)
         .then((value) {
+      closeScreen(context);
       if (value != null) {
         // debugPrint(value.flagUrl.toString());
         VpnProvider.read(context).connect();
@@ -223,7 +223,7 @@ class _ServerItemState extends State<ServerItem>
           await Provider.of<ConnectedServerProvider>(context, listen: false)
               .saveConnectedServerInfo(newInfo);
 
-          closeScreen(context);
+
         });
       }
     });

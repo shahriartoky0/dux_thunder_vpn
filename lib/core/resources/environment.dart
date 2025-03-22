@@ -44,17 +44,17 @@ bool unlockProServerWithRewardAds = true;
 bool unlockProServerWithRewardAdsFail = false;
 
 // ///Done: Set your ad unit id here
-// const String interstitialAdUnitID = "ca-app-pub-3940256099942544/1033173712";
-// const String bannerAdUnitID = "ca-app-pub-3940256099942544/6300978111";
-// const String interstitialRewardAdUnitID =
-//     "ca-app-pub-3940256099942544/5354046379";
-// const String openAdUnitID = "ca-app-pub-3940256099942544/3419835294";
-
-const String interstitialAdUnitID = "ca-app-pub-6493838873948077/3633312611";
+const String interstitialAdUnitID = "ca-app-pub-3940256099942544/1033173712";
 const String bannerAdUnitID = "ca-app-pub-3940256099942544/6300978111";
 const String interstitialRewardAdUnitID =
-    "ca-app-pub-6493838873948077/3633312611";
-const String openAdUnitID = "ca-app-pub-6493838873948077/2178429011";
+    "ca-app-pub-3940256099942544/5354046379";
+const String openAdUnitID = "ca-app-pub-3940256099942544/3419835294";
+
+// const String interstitialAdUnitID = "ca-app-pub-6493838873948077/3633312611";
+// const String bannerAdUnitID = "ca-app-pub-6493838873948077/2320230942";
+// const String interstitialRewardAdUnitID =
+//     "ca-app-pub-6493838873948077/3633312611";
+// const String openAdUnitID = "ca-app-pub-6493838873948077/2178429011";
 
 ///TODO: Set your custom subscription identifier here
 const Map<String, Map<String, dynamic>> subscriptionIdentifier = {
