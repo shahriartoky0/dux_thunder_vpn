@@ -1,0 +1,2 @@
+E:/vpn git/dux_thunder_vpn/android/app/.cxx/RelWithDebInfo/1fi2ai43/x86_64/CMakeFiles/edit_cache.dir
+E:/vpn git/dux_thunder_vpn/android/app/.cxx/RelWithDebInfo/1fi2ai43/x86_64/CMakeFiles/rebuild_cache.dir

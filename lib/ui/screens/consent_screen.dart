@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:thunder_vpn/ui/screens/terms/privacy_policy_page.dart';
 import 'package:thunder_vpn/ui/screens/terms/terms_service_page.dart';
 
-
+import '../../core/providers/globals/vpn_provider.dart';
+import '../../core/utils/appDefault.dart';
 import '../../core/utils/navigations.dart';
 import '../../core/utils/preferences.dart';
 import 'main_screen.dart';
@@ -13,6 +14,15 @@ class ConsentPage extends StatefulWidget {
 }
 
 class _ConsentPageState extends State<ConsentPage> {
+  @override
+  void initState() {
+    super.initState();
+    // _loadSavedServer();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      VpnProvider.read(context).initialize(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +115,20 @@ class _ConsentPageState extends State<ConsentPage> {
                   onPressed: () {
                     Preferences.instance().then((pref) {
                       pref.setTermsAccepted(true);
+                    });
+                    var vpnProvider = VpnProvider.read(context);
+                    VpnProvider.read(context).initialize(context);
+                    // debugPrint(vpnProvider.vpnConfig.toString());
+                    // debugPrint("The second print");
+
+                    vpnProvider
+                        .selectServer(context, defaultConfig)
+                        .then((value) {
+                      if (value != null) {
+                        debugPrint(
+                            "this is getting executed from consent screen");
+                        vpnProvider.connect();
+                      }
                     });
                     Navigator.pushAndRemoveUntil(
                       context,

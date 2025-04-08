@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:openvpn_flutter/openvpn_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:thunder_vpn/core/utils/appDefault.dart';
 
 import '../../models/connected_server_info.dart';
 import '../../models/vpn_config.dart';
@@ -46,6 +47,34 @@ class VpnProvider extends ChangeNotifier {
         providerBundleIdentifier: providerBundleIdentifier,
       );
   }
+  // void initialize(BuildContext context) {
+  //   // Initialize OpenVPN and check if vpnConfig is null
+  //   if (_vpnConfig == null) {
+  //     debugPrint("VPN is null") ;
+  //     Preferences.instance().then((prefs) {
+  //       _vpnConfig = prefs.loadSavedServers(); // Ensure vpnConfig is loaded
+  //       if (_vpnConfig != null) {
+  //         notifyListeners(); // Notify that vpnConfig is loaded
+  //       }
+  //     });
+  //   }
+  //   else {
+  //     // Handle case where vpnConfig is still null, maybe load default config
+  //     _vpnConfig = defaultConfig;
+  //   }
+  //
+  //   engine = OpenVPN(
+  //       onVpnStageChanged: onVpnStageChanged,
+  //       onVpnStatusChanged: onVpnStatusChanged)
+  //     ..initialize(
+  //       lastStatus: onVpnStatusChanged,
+  //       lastStage: (stage) => onVpnStageChanged(stage, stage.name),
+  //       groupIdentifier: groupIdentifier,
+  //       localizedDescription: localizationDescription,
+  //       providerBundleIdentifier: providerBundleIdentifier,
+  //     );
+  // }
+
 
   /// VPN status changed
   void onVpnStatusChanged(VpnStatus? status) {
@@ -81,9 +110,9 @@ class VpnProvider extends ChangeNotifier {
     ${vpnConfig?.config ?? ''}
      ''';
 
-    log('Data fetched: $response');
+    // log('Data fetched: $response');
     // log('VPN Config: ${vpnConfig!.config}');
-    log(config);
+    // log(config);
 
     engine.connect(
       config,
@@ -131,3 +160,4 @@ class VpnProvider extends ChangeNotifier {
 
   static VpnProvider read(BuildContext context) => context.read();
 }
+

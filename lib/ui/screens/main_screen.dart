@@ -15,6 +15,7 @@ import 'package:thunder_vpn/ui/screens/subscription_screen.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../core/models/connected_server_info.dart';
+import '../../core/models/vpn_config.dart';
 import '../../core/providers/globals/ads_provider.dart';
 import '../../core/providers/globals/connected_server.dart';
 import '../../core/providers/globals/theme_provider.dart';
@@ -52,6 +53,7 @@ class _MainScreenState extends State<MainScreen> {
     // _loadSavedServer();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       VpnProvider.read(context).initialize(context);
+
     });
   }
 

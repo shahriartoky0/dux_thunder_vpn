@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dart_ping/dart_ping.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -210,10 +212,10 @@ class _ServerItemState extends State<ServerItem>
     VpnProvider.read(context)
         .selectServer(context, widget.config)
         .then((value) {
-      closeScreen(context);
       if (value != null) {
         // debugPrint(value.flagUrl.toString());
         VpnProvider.read(context).connect();
+
         final newInfo = ConnectedServerInfo(
             id: widget.config.id,
             url: widget.config.flagUrl,
@@ -223,7 +225,7 @@ class _ServerItemState extends State<ServerItem>
           await Provider.of<ConnectedServerProvider>(context, listen: false)
               .saveConnectedServerInfo(newInfo);
 
-
+          closeScreen(context);
         });
       }
     });
